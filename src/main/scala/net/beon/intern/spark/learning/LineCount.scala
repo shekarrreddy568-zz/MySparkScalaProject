@@ -15,7 +15,7 @@ object LineCount {
 
       import spark.implicits._
 
-      val data= spark.read.textFile("hdfs://hadoop-fra-1.intern.beon.net:8020/tmp/test.txt")
+      val data= spark.read.textFile("hdfs://hadoop-fra-1.intern.beon.net:8020/tmp/data/test.txt")
       val linesWithA = data.map(x => x.contains("a")).count()
 
       println(s"lines count: $linesWithA")
