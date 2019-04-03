@@ -8,7 +8,7 @@ object LineCount {
 
     def main(args: Array[String]): Unit = {
 
-      val spark = SparkSession.builder().appName("first programme").master("yarn")
+      val spark = SparkSession.builder().appName("first programme").master("yarn-client")
         .config("spark.hadoop.yarn.resourcemanager.hostname", "hadoop-fra-1")
         .config("spark.hadoop.yarn.resourcemanager.address", "hadoop-fra-1.intern.beon.net:8088")
         .getOrCreate()

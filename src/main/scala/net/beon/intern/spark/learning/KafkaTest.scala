@@ -21,7 +21,11 @@ object KafkaTest {
       .option("subscribe", "test1")
       .load()
 
-   df.select(from_avro($"value", "schemaFile").as("user")).show()
+    val xxx = df.selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)")
+    xxx.show()
+
+
+    //df.select(from_avro($"value", "schemaFile").as("user")).show()
 
     //df.show()
     //val xxx = df.schema
