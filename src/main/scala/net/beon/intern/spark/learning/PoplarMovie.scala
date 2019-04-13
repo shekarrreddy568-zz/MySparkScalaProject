@@ -10,8 +10,9 @@ object PoplarMovie {
     val spark = SparkSession.builder().appName("Popular Movie Analysis").master("local").getOrCreate()
     import spark.implicits._
 
+    val path = if (!args.isEmpty) args(0) else "hdfs://hadoop-fra-4.intern.beon.net:8020/tmp/data/inpatientCharges.csv"
     val data = spark.read.option("inferSchema","true").option("sep","\t")
-      .csv("hdfs://hadoop-fra-1.intern.beon.net:8020/tmp/data/popular_movies.txt")
+      .csv(path)
       .toDF("User ID","Movie ID","Rating","Time stamp")
 
     val pm= data.groupBy("Movie ID").count().orderBy(desc("count"))

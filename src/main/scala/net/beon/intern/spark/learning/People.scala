@@ -13,7 +13,7 @@ object People {
       .enableHiveSupport()
       .getOrCreate()
 
-    val df = spark.read.json("hdfs://hadoop-fra-1.intern.beon.net:8020/tmp/data/people.json")
+    val df = spark.read.json("hdfs://hadoop-fra-4.intern.beon.net:8020/tmp/data/people.json")
 
     //df.write.format("json").save("hdfs://hadoop-fra-1.intern.beon.net:8020/tmp/output")
 

@@ -8,7 +8,9 @@ object HospitalChargesDataAnalysis {
   def main(args: Array[String]): Unit = {
 
     val spark = SparkSession.builder().appName("Hospital Charges Data Analysis").master("local")
-      .config("spark.sql.shuffle.partitions",5).getOrCreate()
+      .config("spark.sql.shuffle.partitions",5)
+      .enableHiveSupport()
+      .getOrCreate()
 
     import spark.implicits._
 
@@ -23,14 +25,15 @@ object HospitalChargesDataAnalysis {
       .withColumnRenamed("sum(TotalDischarges)","total").orderBy($"total".desc).cache()
 
     //dischargesPerState.write.format("parquet").mode("overwrite").save("hdfs://hadoop-fra-4.intern.beon.net:8020/tmp/result")
+    dischargesPerState.write.mode("overwrite").saveAsTable("dischargesPerState")
 
     val jspnData = dischargesPerState.toJSON
 
-    jspnData.select("value")
-      .write.format("kafka")
-      .option("kafka.bootstrap.servers", "hadoop-fra-5.intern.beon.net:9092")
-      .option("topic","dischargesPerState")
-      .save()
+//    jspnData.select("value")
+//      .write.format("kafka")
+//      .option("kafka.bootstrap.servers", "hadoop-fra-5.intern.beon.net:9092")
+//      .option("topic","dischargesPerState")
+//      .save()
 
 
   }

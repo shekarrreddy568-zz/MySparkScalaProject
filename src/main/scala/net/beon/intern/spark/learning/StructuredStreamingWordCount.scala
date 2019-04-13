@@ -11,7 +11,7 @@ object StructuredStreamingWordCount {
     import spark.implicits._
 
     val lines = spark.readStream.format("socket")
-      .option("host","hadoop-fra-1.intern.beon.net")
+      .option("host","hadoop-fra-4.intern.beon.net")
       .option("port",9999)
       .load()
 

@@ -4,7 +4,7 @@ package net.beon.intern.spark.learning
 import java.nio.file.{Files, Paths}
 
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.avro._
+//import org.apache.spark.sql.avro._
 
 object KafkaTest {
 
