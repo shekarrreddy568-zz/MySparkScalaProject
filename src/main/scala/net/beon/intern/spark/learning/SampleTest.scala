@@ -9,12 +9,11 @@ object SampleTest {
   def main(args: Array[String]): Unit = {
 
     val spark = SparkSession.builder().master("local").appName("sample test")
-//      .config("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
- //     .config("spark.scheduler.mode", "FAIR")
+      .enableHiveSupport()
       .getOrCreate()
     import spark.implicits._
 
-    //spark.sql("SET spark.sql.shuffle.partitions=10;")
+    spark.sql("SET spark.sql.shuffle.partitions=10;")
 
 
     }
