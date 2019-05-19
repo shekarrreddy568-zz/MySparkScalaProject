@@ -21,10 +21,24 @@ object KafkaTest {
       .option("subscribe", "test1")
       .load()
 
+    df.printSchema()
+    df.show(2,false)
     val xxx = df.selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)")
     xxx.show()
 
+    df.select("key","value")
+      .write.format("kafka")
+      .option("kafka.bootstrap.servers", "hadoop-fra-5.intern.beon.net:9092")
+      .option("topic","test2")
+      .save()
 
+    val df2 = spark.read.format("kafka")
+      .option("kafka.bootstrap.servers", "hadoop-fra-5.intern.beon.net:9092")
+      .option("subscribe", "test2")
+      .load()
+
+    df2.printSchema()
+    df2.show(5,false)
     //df.select(from_avro($"value", "schemaFile").as("user")).show()
 
     //df.show()
